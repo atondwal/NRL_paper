@@ -1,0 +1,107 @@
+%        File: paper.tex
+%     Created: Wed Aug 03 10:00 AM 2011 E
+% Last Change: Wed Aug 03 10:00 AM 2011 E
+%
+\documentclass[journal,twoside]{IEEEtran}
+\usepackage{cite, graphicx, subfigure, amsmath} 
+\interdisplaylinepenalty=2500
+\hyphenation{}
+\begin{document}
+\title{Analysis of SAMI2 data}
+\author{Anish Tondwalkar~\IEEEmembership{NRL, Code 6755}}
+\thanks{Thomas Jefferson High School for Science and Technology,
+Jun-Aug 2011, Naval Research Lab, Code 6755, under Carl Siefring}% <-this % stops a space
+\markboth{SEAP'11 at NRL}{Tondwalkar, A.: Analysis of SAMI2 data}
+\maketitle
+
+
+\begin{abstract}
+The Naval Research Laboratory is conducting an interdisciplinary physics-based space weather model development and validation program called the Integrated Sun-Earth System for the Operational Environment (ISES-OE). The goal of ISES-OE is to improve our quantitative understanding of the space environment, which can disrupt or degrade operational communications and navigation systems, and ultimately to advance our ability to forecast space weather on multiple time scales. As part of this program, for validation, numerous runs of the physics-based SAMI3 model have been made and compared to global measurements of electron density.  The data sets includes  Ionosonde foF2 and hmF2 measurements and GPS Total Electron Content (TEC) measurements. The comparisons presented will primarily center on Feb. 19 - April 19, 2008 which contains the most recent Whole Heliospheric Interval (WHI).  This time period, during solar minimum, has only very modest solar activity and is a good test to validate the SAMI3 simulations of the base-state ionosphere. The simulations are driven with a solar irradiance model based on TIMED/SEE measurements and with daily Ap and F10.7 indices. Thermospheric conditions are specified with empirical models of the neutral wind (HWM07) and neutral composition and temperature (NRLMSISE-00). We compare SAMI3 with various measurements, including global TEC maps, ionosonde-derived NmF2 and hmf2, and GUVI measurements of exospheric temperature.  The results indicate that the SAMI3 has too much plasma in the topside ionosphere and too little in the bottomside ionosphere.Furthermore, SAMI3 shows the F2 peak to be too high and less dense. This indicates a overall excessive slab height in the model, which was verified in comparison to the data.
+It was found that the model consistently had a higher 
+total electron content and slab height than the real Ionosphere. The electron
+density of the model was found to be consistently lower than that of the 
+actual ionosphere.
+\end{abstract}
+
+\begin{keywords}
+  SAMI, Ionosphere, Modelling, Ionosonde, GPS, Plasma.
+\end{keywords}
+
+\section{Introduction}
+\PARstart T{he Ionosphere} is a plasma layer of the Earth's Atmosphere that extends upward from about 90km. It is vertically stratified into regions, and it moves up and down again over the course of a day. It is important because the only way to send long distance radio communications is to bounce them off the ionosphere. Waves that are too high in frequency, however, will escape into space. The frequency of the wave that can be sent back down is related to the density by
+$$\omega_{pe} = \sqrt\frac{n_e e^2}{m^*\varepsilon_0}$$
+Therefore, it is important to know the peak density of the ionosphere at a given time, to know at what frequency we can transmit and expect to get our information back. 
+
+To first order the atmosphere above about 200 km can be
+described by the pressure/temperature scale heights.
+$$\frac{dP}{dz}=\frac{d \left( nk_BT_n \right)}{dz} = \left< m_n \right> n_ng$$
+$$n_n=n_0 e^{-\left( z-z_0 \right)/H_n}$$
+$$H_n = \frac{k_BT_n}{\left< m_n \right>g}$$
+
+The ionosphere is ionized by radiation from the sun, and is high up in the atmosphere, and therefore is greatly affected by variation in space weather. Measures of space weather that serve as an input to the model are Solar Extreme Ultraviolet (EUV) flux, $A_p$, and $f_{10.7}$. Here, SAMI3 is coupled with these other models of space weather, and takes inputs from space weather and upper atmospheric models. These models are usually empirical and use simplified physics if any at all to interpolate between measured data points.
+The production rate ($P$) due to EUV depends on solar EUV flux ($I$), solar zenith angle ($\chi$) and neutral density ($N_n(z)$).
+$$P(\chi,z)\propto I(\chi,z) N_n(z)$$
+Note that $P(\chi,z)$ peaks well below the $F_2$ region.
+
+Ionization is lost through recombination and diffusion. 
+    The equilibrium electron and ion densities ($N_e(z)$ an $N_i(z)$) are determined by a balance of production and loss.
+    Both recombination and diffusion are dependent on the neutral density. The peak density, $n_mF_2$ occurs near the minimum loss condition, where recombination and diffusion are equal.
+
+\subsection{SAMI\{2,3\}}
+
+  {Integrated Sun-Earth System for the Operational Environment (ISES-OE)} is NRL's working group on space weather and its interaction with the ionosphere
+    The goal of ISES-OE is to improve our quantitative understanding of the space environment, which can disrupt or degrade operational communications and navigation systems, and ultimately to advance our ability to forecast space weather on multiple time scales.
+  
+  Feb. 19 - April 19, 2008 contains the most recent Whole Heliospheric Interval (WHI).  This time period, during solar minimum, has only very modest solar activity and is a good test to validate the SAMI3 simulations of the base-state ionosphere. It has the record lowest density and $f_{10.7}$ out of the recoded solar minima. It was also during the last solar minimum, the lowest point in the eleven year solar cycle.
+
+SAMI3 is NRL's model of the ionosphere. It is unique in that it solves the momentum equations for electrons and ions, unlike previous physics-based models of the ionosphere:
+  \[ \frac{\partial \vec V_i}{\partial t} + \vec V_i \cdot \nabla \vec V_i = 
+     -\frac1{\rho_i} \nabla\vec P_i 
+     + \frac e{m_i}\vec E + \frac e{m_ic} \vec V_i \times \vec B 
+     +\vec g \]
+  \[  -\nu_{in} \left( \vec V_i -\vec V_n \right)
+     -\sum_j \nu_{ij} \left( \vec V_i -\vec V_j\right) \]
+  \[\frac1{n_e m_e} \nabla \vec P_e + \frac e{m_e} \vec E + \frac e{m_ec} \vec V_e \times \vec B = 0 \]
+It solves these numerically, along with the temperature equations
+  \[\frac{\partial T_i}{\partial t} + \vec V_i \cdot \nabla T_i + \frac23 T_i \nabla \vec V_i 
+  +\frac23 \frac1{n_i k} \nabla \vec Q_i =Q_{in} + Q_{ii} +Q{ie} \]
+  And the continuity equation for ions, with the production and loss terms added.
+  \[ \frac{\partial n_i}{\partial t} + \nabla \cdot \left( n_i\vec V_i \right) = \mathcal P_i - \mathcal L_i n_i \]
+
+  MSIS is our model of the neutral atmosphere.  The primary comparison run compensates from MSIS's departure from the actual atmosphere by scaling the outputs from MSIS as they are read into SAMI3. The temprature of the exosphere was scaled by $0.9607$ the $[O]$ by $0.7979$ and all other neutral densities by $.9697$. 
+
+% You must have at least 2 lines in the paragraph with the drop letter
+% (should never be an issue)
+
+
+%\IEEEtriggeratref{8}
+% The "triggered" command can be changed if desired:
+%\IEEEtriggercmd{\enlargethispage{-5in}}
+
+% references section
+
+%\bibliographystyle{IEEEtran.bst}
+%\bibliography{IEEEabrv,../bib/paper}
+\begin{thebibliography}{1}
+
+  \bibitem{IEEEhowto:kopka}
+    H.~Kopka and P.~W. Daly, \emph{A Guide to {\LaTeX}}, 3rd~ed.\hskip 1em plus
+    0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
+
+\end{thebibliography}
+
+% You can push biographies down or up by placing
+% a \vfill before or after them. The appropriate
+% use of \vfill depends on what kind of text is
+% on the last page and whether or not the columns
+% are being equalized.
+
+%\vfill
+
+% Can be used to pull up biographies so that the bottom of the last one
+% is flush with the other column.
+%\enlargethispage{-5in}
+
+\end{document}
+
+
